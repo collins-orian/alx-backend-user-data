@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """Module for Authentication"""
-
-from flask import request
+from flask import request as req
 from typing import List, TypeVar
 
 
@@ -15,9 +14,11 @@ class Auth:
     def authorization_header(self, request=None) -> str:
         """gets the authorization header from the request"""
         if request is not None:
-            return request.headers.get('Authorization', None)
+            return req.headers.get('Authorization', None)
         return None
 
     def current_user(self, request=None) -> TypeVar('User'):
         """gets the current user from the request"""
+        if request is not None:
+            return req.headers.get('Authorization', None)
         return None
