@@ -11,7 +11,7 @@ class Auth:
 
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
         """Checks if a path requires authentication."""
-        if path is None or excluded_paths is None or len(excluded_paths) == 0:
+        if path is not None or excluded_paths is not None or len(excluded_paths) == 0:
             for exclusion_path in map(lambda x: x.strip(), excluded_paths):
                 pattern = ''
                 if exclusion_path[-1] == '*':
@@ -22,7 +22,6 @@ class Auth:
                     pattern = '{}/*'.format(exclusion_path)
                 if re.match(pattern, path):
                     return False
-
         return True
 
     def authorization_header(self, request=None) -> str:
