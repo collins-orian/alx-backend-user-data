@@ -27,7 +27,7 @@ class BasicAuth(Auth):
 
     def decode_base64_authorization_header(
             self, base64_authorization_header: str) -> str:
-        """that returns the decoded value of a Base64 string"""
+        """This method returns the decoded value of a Base64 string"""
         if type(base64_authorization_header) == str:
             try:
                 res = base64.b64decode(
