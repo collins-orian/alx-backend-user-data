@@ -5,7 +5,7 @@ from models.user import User
 import re
 import base64
 import binascii
-from typing import TypeVar
+from typing import TypeVar, Tuple
 
 
 class BasicAuth(Auth):
@@ -41,7 +41,7 @@ class BasicAuth(Auth):
                 return None
 
     def extract_user_credentials(
-            self, decoded_base64_authorization_header: str) -> (str, str):
+            self, decoded_base64_authorization_header: str) -> Tuple(str, str):
         """This method returns the user email and password
         from the Base64 decoded value"""
         if type(decoded_base64_authorization_header) == str:
@@ -58,6 +58,8 @@ class BasicAuth(Auth):
 
     def user_object_from_credentials(
             self, user_email: str, user_pwd: str) -> TypeVar('User'):
+        """This method  that returns the User instance based
+        on his email and password."""
         if type(user_email) == str and type(user_pwd) == str:
             try:
                 users = User.search({'email': user_email})
